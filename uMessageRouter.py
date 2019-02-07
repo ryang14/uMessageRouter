@@ -20,6 +20,12 @@ class Router:
             for thread in self.subscriptions[topic]:
                 _thread.notify(thread, _thread.RESUME) # Resume the task
                 _thread.sendmsg(thread, json.dumps({topic: message})) # Encode topic and message
+        
+        # Publish every message to the wildcard topic
+        if "*" in self.subscriptions:
+            for thread in self.subscriptions["*"]:
+                _thread.notify(thread, _thread.RESUME) # Resume the task
+                _thread.sendmsg(thread, json.dumps({topic: message})) # Encode topic and message
 
     # Check for messages and extract the topic
     # Called from task
