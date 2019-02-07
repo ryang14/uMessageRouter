@@ -1,7 +1,9 @@
 import _thread
 from router import Router
+from log import Log
 
 router = Router()
+logger = Log(router, '*')
 
 def workerThread():
     while True:
