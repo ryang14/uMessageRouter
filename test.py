@@ -1,5 +1,5 @@
 import _thread
-from uMessageRouter import Router
+from router import Router
 
 router = Router()
 
