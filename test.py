@@ -5,8 +5,7 @@ router = Router()
 
 def workerThread():
     while True:
-        print(_thread.getmsg())
-        _thread.wait()
+        print(router.checkMessages(wait = True))
 
 threadID = _thread.start_new_thread("Thread", workerThread, ())
 router.subscribe("test", threadID)
