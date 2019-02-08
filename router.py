@@ -19,13 +19,13 @@ class Router:
         if topic in self.subscriptions:
             for thread in self.subscriptions[topic]:
                 _thread.notify(thread, _thread.RESUME) # Resume the task
-                _thread.sendmsg(thread, json.dumps({topic: message})) # Encode topic and message
+                _thread.sendmsg(thread, json.dumps({"topic": topic, "message": message})) # Encode topic and message
         
         # Publish every message to the wildcard topic
         if "*" in self.subscriptions:
             for thread in self.subscriptions["*"]:
                 _thread.notify(thread, _thread.RESUME) # Resume the task
-                _thread.sendmsg(thread, json.dumps({topic: message})) # Encode topic and message
+                _thread.sendmsg(thread, json.dumps({"topic": topic, "message": message})) # Encode topic and message
 
     # Check for messages and extract the topic
     # Called from task
@@ -41,7 +41,10 @@ class Router:
         message_type, sender_ID, message_JSON = _thread.getmsg()
 
         if message_type == 2: # If the message is a string
-            topic, message = list(json.loads(message_JSON).items())[0] # Parse the topic and message
+            # Parse the topic and message
+            msg = json.loads(message_JSON)
+            topic = msg["topic"]
+            message = msg["message"]
             return (topic, message)
         
         return (None, None)
