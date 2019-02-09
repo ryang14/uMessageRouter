@@ -1,7 +1,7 @@
 # uMessageRouter
 Route messages between threads in MicroPython.
 
-Will likely use the _thread library in the loboris MicroPython port: https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki/thread.
+Uses the _thread library in the loboris MicroPython port: https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/wiki/thread.
 
 Current concept:
  - Threads started
