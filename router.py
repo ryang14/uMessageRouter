@@ -9,7 +9,7 @@ class Router:
     # Can be called anywhere
     def subscribe(self, topic, thread):
         if not topic in self.subscriptions:
-            self.subscriptions[topic] = {thread}
+            self.subscriptions[topic] = [thread]
         else:
             self.subscriptions[topic].append(thread)
 
